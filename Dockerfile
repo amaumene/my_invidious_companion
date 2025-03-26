@@ -22,4 +22,6 @@ COPY --from=builder /app/config/ /app/config/
 ENV PORT="8282" \
     HOST="::"
 
+EXPOSE 8282/tcp
+
 ENTRYPOINT ["/app/invidious_companion"]
