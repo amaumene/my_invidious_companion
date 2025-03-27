@@ -8,6 +8,10 @@ WORKDIR /app
 
 RUN rm deno.lock
 
+RUN rm deno.json
+
+COPY ./deno.json /app/deno.json
+
 RUN deno outdated --update --latest -- --allow-import
 
 RUN deno task compile
