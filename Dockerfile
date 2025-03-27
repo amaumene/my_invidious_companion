@@ -27,5 +27,4 @@ ENV PORT="8282" \
     HOST="::"
 
 EXPOSE 8282/tcp
-
-ENTRYPOINT ["/app/invidious_companion"]
+CMD ["/app/invidious_companion"]
