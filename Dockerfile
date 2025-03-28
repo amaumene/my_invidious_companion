@@ -16,7 +16,16 @@ RUN deno outdated --update --latest -- --allow-import
 
 RUN deno task compile
 
-FROM gcr.io/distroless/cc
+FROM scratch
+
+COPY --from=builder /lib/ld-linux-* /lib/
+COPY --from=builder /usr/local/lib/libgcc_s.so.1 /usr/local/lib/libgcc_s.so.1
+COPY --from=builder /usr/local/lib/libdl.so.2 /usr/local/lib/libdl.so.2
+COPY --from=builder /usr/local/lib/libpthread.so.0 /usr/local/lib/libpthread.so.0
+COPY --from=builder /usr/local/lib/libm.so.6 /usr/local/lib/libm.so.6
+COPY --from=builder /usr/local/lib/libc.so.6 /usr/local/lib/libc.so.6
+
+ENV LD_LIBRARY_PATH="/usr/local/lib"
 
 WORKDIR /app
 
