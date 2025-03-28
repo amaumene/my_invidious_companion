@@ -16,6 +16,8 @@ RUN deno outdated --update --latest -- --allow-import
 
 RUN deno task compile
 
+RUN mkdir -p /var/tmp/youtubei.js
+
 FROM scratch
 
 COPY --from=builder /lib/ld-linux-* /lib/
@@ -31,6 +33,7 @@ WORKDIR /app
 
 COPY --from=builder /app/invidious_companion /app/invidious_companion
 COPY --from=builder /app/config/ /app/config/
+COPY --from=builder --chown=65532 /var/tmp/youtubei.js /var/tmp/youtubei.js
 
 ENV PORT="8282" \
     HOST="::"
