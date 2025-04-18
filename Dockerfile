@@ -12,6 +12,8 @@ RUN rm deno.json
 
 COPY ./deno.json /app/deno.json
 
+RUN deno upgrade
+
 RUN deno outdated --update --latest -- --allow-import
 
 RUN deno task compile
